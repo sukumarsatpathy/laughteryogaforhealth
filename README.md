@@ -5,7 +5,7 @@ Welcome to Laughter Yoga for Health project by Laughter CMS, a comprehensive pla
 ## Technologies Used
 - **Backend**: Django
 - **Frontend**: Bootstrap5 (HTML, CSS, JS)
-  - **Database**: PostgreSQL
+- **Database**: PostgreSQL
 
 ## Features
 
@@ -55,9 +55,6 @@ Welcome to Laughter Yoga for Health project by Laughter CMS, a comprehensive pla
 ### 11. Login Form
 - Secure authentication system.
 - Password recovery functionality for added user convenience.
-
-## License
-This project is licensed under the MIT License.
 
 ## Acknowledgements
 1. Bootstrap5 Documentation 
