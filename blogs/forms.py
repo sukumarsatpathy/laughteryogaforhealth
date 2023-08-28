@@ -17,3 +17,5 @@ class BlogForm(forms.ModelForm):
         self.fields['meta_description'].widget.attrs['class'] = 'form-control'
         self.fields['meta_keywords'].widget.attrs['class'] = 'form-control'
         self.fields['status'].widget.attrs['class'] = 'form-select'
+        for field in self.fields:
+            self.fields[field].widget.attrs['placeholder'] = 'Provide Detail'
