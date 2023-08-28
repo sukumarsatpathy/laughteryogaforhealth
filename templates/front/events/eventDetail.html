@@ -1,0 +1,113 @@
+{% extends 'front/base.html' %}
+{% load static %}
+{% load blogURL %}
+{% load embed_video_tags %}
+{% block meta %}
+<title xmlns="http://www.w3.org/1999/html">{{single_event.title}} - Events</title>
+    <meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+    <meta name="description" content="{{webSettingsUniversal.description}}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{single_event.title}} - Events">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+{% block content %}
+<section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{single_event.image.url}}">
+    <div class="container pt-18 pb-15 pt-md-20 pb-md-19 text-center">
+        <div class="row">
+            <div class="col-md-10 col-xl-8 mx-auto">
+                <div class="post-header">
+                    <div class="post-category text-line text-white">
+                        <a href="{% url 'event' %}" class="text-reset" rel="category">Back to Events</a>
+                    </div>
+                    <h1 class="display-1 mb-4 text-white">{{single_event.title}}</h1>
+                    <ul class="post-meta text-white">
+                        <li class="post-date"><i class="uil uil-calendar-alt"></i><span>{{single_event.start_date|date:"d-M-Y"}}</span>
+                        </li>
+                        <li class="post-author"><i class="uil uil-user"></i><a href="#" class="text-reset"><span>By {{single_event.organiser}}</span></a>
+                        </li>
+                        <li class="post-likes"><i class="uil uil-eye"></i><a href="#" class="text-reset">{{single_event.views}}<span> Views</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="wrapper bg-light">
+    <div class="container py-12 py-md-10">
+        <div class="row gx-lg-8 gx-xl-12">
+            <div class="col-lg-8">
+                <div class="blog single">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="classic-view">
+                                <article class="post">
+                                    <div class="post-content mb-5">
+                                        <h2 class="h1 mb-4">{{single_event.title}}</h2>
+                                        <p>{{single_event.description|safe}}</p>
+                                    </div>
+                                    <div class="post-content mb-5">
+                                        <p class="mb-4"><strong>Date:</strong>
+                                            {{single_event.start_date|date:'M d, Y - g:i A'}} to {{single_event.end_date|date:'M d, Y - g:i A'}}
+                                        </p>
+                                        <p class="mb-4"><strong>Location:</strong>
+                                            {{single_event.location}}
+                                        </p>
+                                    </div>
+                                    <div class="post-content mb-5">
+                                        <p class="mb-4"><strong>Organiser:</strong> {{single_event.organiser}}</p>
+                                        <p class="mb-4"><strong>Contact:</strong> {{single_event.contact_no}}</p>
+                                        <p class="mb-4"><strong>Email:</strong> <a href="mailto:{{single_event.email}}" target="_blank">{{single_event.email}}</a></p>
+                                    </div>
+                                    <div class="post-content mb-5">
+                                        <p class="mb-4">
+                                            {% video single_event.video '720x400' %}
+                                        </p>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <aside class="col-lg-4 sidebar mt-11 mt-lg-6">
+                <div class="widget">
+                    <h4 class="widget-title mb-3">Upcoming Events</h4>
+                    <ul class="image-list">
+                        {% for events in related_events %}
+                        <li>
+                            <figure class="rounded">
+                                <a href="{% url 'eventDetail' events.slug %}">
+                                    <img src="{{events.image.url}}" alt="{{events.title}}"/>
+                                </a>
+                            </figure>
+                            <div class="post-content">
+                                <p class="mb-1">
+                                    <a class="link-dark" href="{% url 'eventDetail' events.slug %}">{{events.title}}</a><br>Date: {{events.start_date|date:"M-d-Y"}}
+                                </p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {% for ads in all_adBlocks %}
+                <div class="widget">
+                    <a href="{{ads.url}}" target="_blank">
+                        <figure class="rounded mb-2">
+                            <img src="{{ads.image.url}}" srcset="{{ads.image.url}}" alt="{{ads.title}}">
+                        </figure>
+                    </a>
+                </div>
+                {% endfor %}
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block footerJS %}
+<script src="{% static '/js/plugins.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'back/base.html' %}
+{% load static %}
+{% load blogURL %}
+{% block meta %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>List Banner - {{webSettingsUniversal.title}}</title>
+    <meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+    <meta name="description" content="{{webSettingsUniversal.description}}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="List Banner - {{webSettingsUniversal.title}}">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+{% block content %}
+<div class="page-content">
+    <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0 font-size-18">List Banner Texts</h4>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}" target="_parent">Dashboard</a></li>
+                            <li class="breadcrumb-item active">List Banner Texts</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        {% include 'back/includes/messages.html' %}
+        <div class="row">
+            <div class="col-lg-12">
+                {% if all_banners %}
+                <div class="table-responsive">
+                    <table class="table project-list-table table-nowrap align-middle table-borderless">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width: 100px">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col" style="width: 200px" >Status</th>
+                            <th scope="col" style="width: 200px">Uploaded On</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for banners in all_banners %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{banners.title}}</td>
+                            <td>
+                                <span class="badge bg-{% if banners.status == 'Published' %}success{% else %}warning{% endif %}">{{banners.status}}</span>
+                            </td>
+                            <td>{{banners.created_date}}</td>
+                            <td><a href="{% url 'bannerEdit' banners.id %}" target="_parent">Edit</a></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Oops!!! No Banners Found. Please publish a banner text.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if all_banners.has_other_pages %}
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="pagination pagination-rounded justify-content-center mt-2 mb-5">
+                    <!-- Left Arrow -->
+                    {% if all_banners.has_previous %}
+                    <li class="page-item">
+                        <a href="{% blogURL all_banners.previous_page_number 'page' request.get.urlencode %}" class="page-link">
+                            <i class="mdi mdi-chevron-left"></i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a href="javascript: void(0);" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                    </li>
+                    {% endif %}
+
+                    {% for i in all_banners.paginator.page_range %}
+                        {% if all_banners.number == i %}
+                            <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                            {% elif i > all_banners.number|add:'-13' and i < all_banners.number|add:'13' %}
+                            <li class="page-item"><a class="page-link" href="{% blogURL i 'page' request.GET.urlencode %}">{{i}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    <!-- Right Arrow -->
+                    {% if all_banners.has_next %}
+                    <li class="page-item">
+                        <a href="{% blogURL all_banners.next_page_number 'page' request.get.urlencode %}" class="page-link">
+                            <i class="mdi mdi-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a href="javascript: void(0);" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

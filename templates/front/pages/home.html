@@ -1,0 +1,353 @@
+{% extends 'front/base.html' %}
+{% load static %}
+
+{% block meta %}
+    <title>{{webSettingsUniversal.title}} - {{webSettingsUniversal.slogan}}</title>
+    <meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+    <meta name="description" content="{{webSettingsUniversal.description}}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{webSettingsUniversal.title}} - {{webSettingsUniversal.slogan}}">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+
+{% block content %}
+<section class="wrapper bg-gradient-primary mb-5 pb-5">
+    <div class="container py-7 py-md-10">
+        <div class="row gx-2 gy-10 align-items-center">
+            {% for banner in all_banner %}
+            <div class="col-md-10 offset-md-1 offset-lg-0 col-lg-5 text-center text-lg-start order-2 order-lg-0"
+                 data-cues="slideInDown" data-group="page-title" data-delay="600">
+                <h1 class="display-1 mb-5 mx-md-10 mx-lg-0">{{banner.title}}</h1>
+                <p class="display-3 fs-23 mb-7">{{banner.txt1}} <br> {{banner.txt2}}</p>
+                <p class="lead fs-23 mb-7">{{banner.description}}</p>
+                <!--<div class="d-flex justify-content-center justify-content-lg-start mb-4" data-cues="slideInDown"
+                     data-group="page-title-buttons" data-delay="900">
+                    <span><a href="{{banner.btn_url}}" target="_self"
+                             class="btn btn-lg btn-primary rounded-pill me-2">{{banner.btn_txt}}</a></span>
+                </div>-->
+            </div>
+            <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-1 position-relative order-lg-2" data-cue="zoomIn"
+                 data-show="true"
+                 style="animation-name: zoomIn; animation-duration: 700ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                <div class="swiper-container dots-over" data-margin="5" data-dots="true" data-nav="true"
+                     data-autoheight="true">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            {% for img in all_bannerImg %}
+                            <div class="swiper-slide rounded">
+                                <img src=".{{img.image.url}}" alt=""/>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% if all_serviceCat %}
+<section class="wrapper bg-light mb-5 pb-5">
+    <div class="container py-14 py-md-7">
+        <div class="row text-center">
+            <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                <h3 class="display-4 mb-10 px-xl-10">Different Applications of <br> <span
+                        class="text-gradient gradient-7">Laughter Yoga</span></h3>
+            </div>
+        </div>
+        <div class="position-relative mb-14 mb-md-5">
+            <div class="shape rounded-circle bg-soft-primary rellax w-16 h-16" data-rellax-speed="1"
+                 style="bottom: -0.5rem; right: -2.5rem; z-index: 0;"></div>
+            <div class="shape bg-dot primary rellax w-16 h-17" data-rellax-speed="1"
+                 style="top: -0.5rem; left: -2.5rem; z-index: 0;"></div>
+            <div class="row gx-md-5">
+                {% for services in all_serviceCat %}
+                <div class="col-md-6 col-xl-3">
+                    <div class="card">
+                        <figure class="card-img-top overlay overlay-1 hover-scale">
+                            <img src="{{services.image.url}}" alt="{{services.title}}" width="100%" height="100%"/>
+                        </figure>
+                        <div class="card-body">
+                            <h4>{{services.title}}</h4>
+                            <p class="mb-2">{{services.short_description|truncatechars:90}}</p>
+                            <a href="{% url 'serviceDetail' services.slug %}" class="more hover link-primary"
+                               target="_parent">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section class="wrapper bg-soft-primary bg-gradient-primary">
+    <div class="container py-14 py-md-16">
+        <div class="row text-center">
+            <div class="col-md-11 col-lg-9 col-xl-8 col-xxl-7 mx-auto position-relative">
+                <img src="{% static '/img/svg/doodle3.svg' %}" class="h-11 position-absolute d-none d-lg-block"
+                     style="top: -20%; right: -12%" alt="">
+                <img src="{% static '/img/svg/doodle9.svg' %}" class="h-17 position-absolute d-none d-lg-block"
+                     style="bottom: 5%; left: -17%" alt="">
+                <h2 class="fs-16 text-uppercase text-muted mb-3 text-center">Why Laughter Yoga?</h2>
+                <h3 class="display-3 mb-12 text-center">5 <span class="text-gradient gradient-7">Benefits</span>
+                    of Laughter Yoga.</h3>
+            </div>
+            <!-- /column -->
+        </div>
+        <!-- /.row -->
+        <div class="row d-flex align-items-start">
+            <div class="col-lg-6 position-lg-sticky" style="top: 8rem;">
+                <div class="row gx-md-5 gy-5 pb-5">
+                    <div class="col-12">
+                        <figure class="rounded mx-5">
+                            <img src="{% static '/img/pages/5point-1.webp' %}" alt="5 Points 1">
+                        </figure>
+                    </div>
+                    <div class="col-md-6">
+                        <figure class="rounded">
+                            <img src="{% static '/img/pages/5point-2.webp' %}" alt="5 Points 2">
+                        </figure>
+                    </div>
+                    <div class="col-md-6">
+                        <figure class="rounded">
+                            <img src="{% static '/img/pages/5point-3.webp' %}" alt="5 Points 3">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <!-- /column -->
+            <div class="col-lg-5 ms-auto">
+                <div class="d-flex flex-row mb-8">
+                    <div>
+                        <div class="svg-bg svg-bg-lg bg-pale-grape rounded-xl me-5">
+                            <img src="{% static '/img/icons/happy.png' %}" class="img-fluid" alt="Good Mood and More Laughter" width="50px"/></div>
+                        </div>
+                    <div>
+                        <h4 class="fs-20">Good Mood and More Laughter</h4>
+                        <p>Laughter Yoga helps to change your mood within minutes by releasing certain chemicals from
+                            your brain cells called endorphins. You will remain cheerful and in a good mood throughout
+                            the day and will laugh more than you normally do.</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-row mb-8">
+                    <div>
+                        <div class="svg-bg svg-bg-lg bg-pale-green rounded-xl me-5">
+                            <img src="{% static '/img/icons/stress.png' %}" class="img-fluid" alt="Healthy Exercise to Beat Stress" width="50px" /></div>
+                        </div>
+                    <div>
+                        <h4 class="fs-20">Healthy Exercise to Beat Stress</h4>
+                        <p>Laughter Yoga is like an aerobic exercise (cardio workout) which brings more oxygen to the
+                            body and brain thereby making one feel more energetic and relaxed</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-row mb-8">
+                    <div>
+                        <div class="svg-bg svg-bg-lg bg-pale-pink rounded-xl me-5">
+                            <img src="{% static '/img/icons/health.png' %}" class="img-fluid" alt="Health Benefits" width="50px" />
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="fs-20">Health Benefits</h4>
+                        <p>Laughter Yoga reduces the stress and strengthens the immune system.You will not fall sick
+                            easily and if you have some chronic health conditions, you will heal faster.</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-row mb-8">
+                    <div>
+                        <div class="svg-bg svg-bg-lg bg-pale-yellow rounded-xl me-5">
+                            <img src="{% static '/img/icons/life.png' %}" class="img-fluid" alt="Quality of Life" width="50px" />
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="fs-20">Quality of Life</h4>
+                        <p>Laughter is a positive energy which helps people to connect with other people quickly and
+                            improves relationships. If you laugh more, you will attract many friends.</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-row mb-8">
+                    <div>
+                        <div class="svg-bg svg-bg-lg bg-pale-blue rounded-xl me-5">
+                            <img src=".{% static '/img/icons/challenging-time.png' %}" class="img-fluid" alt="Positive Attitude in Challenging Times" width="50px" />
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="fs-20">Positive Attitude in Challenging Times</h4>
+                        <p>Everyone can laugh when life is good, but how does one laugh when faced with challenges?
+                            Laughter helps to create a positive mental state to deal with negative situations and
+                            negative people. It gives hope and optimism to cope with difficult times.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if all_testimonials %}
+<section class="wrapper bg-light">
+    <div class="container py-15 py-md-15">
+        <h2 class="display-4 mb-3 text-center">Life Changing Experience</h2>
+        <p class="lead text-center mb-6 px-md-16 px-lg-0">Laughter Yoga has transformed the lives of millions of people
+            around the world.</p>
+        <div class="position-relative">
+            <div class="shape rounded-circle bg-soft-yellow rellax w-16 h-16" data-rellax-speed="1"
+                 style="bottom: 0.5rem; right: -1.7rem;"></div>
+            <div class="shape bg-dot primary rellax w-16 h-16" data-rellax-speed="1"
+                 style="top: -1rem; left: -1.7rem;"></div>
+            <div class="swiper-container dots-closer mb-6" data-margin="0" data-dots="true" data-items-xl="3"
+                 data-items-md="2" data-items-xs="1">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        {% for testimonial in all_testimonials %}
+                        <div class="swiper-slide">
+                            <div class="item-inner">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <blockquote class="icon mb-0">
+                                            <p>{{testimonial.message|safe|truncatechars:200}}</p>
+                                            <div class="blockquote-details">
+                                                <img class="rounded-circle w-12" src="{{testimonial.image.url}}"
+                                                     alt="{{testimonial.fullName}}"/>
+                                                <div class="info">
+                                                    <h5 class="mb-1">{{testimonial.fullName}}</h5>
+                                                    <p class="mb-0">{{testimonial.designation}}</p>
+                                                </div>
+                                            </div>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if all_blogs %}
+<section class="wrapper {% if all_testimonials and all_blogs %}bg-soft-primary bg-gradient-primary{% else %}wrapper bg-light{% endif %}">
+    <div class="overflow-hidden">
+        <div class="container py-14 py-md-10">
+            <div class="row">
+                <div class="col-xl-7 col-xxl-6 mx-auto text-center">
+                    <i class="icn-flower text-leaf fs-30 opacity-25"></i>
+                    <h2 class="display-5 text-center mt-2 mb-10">Ashwin & Deepika blog</h2>
+                </div>
+            </div>
+            <div class="swiper-container nav-bottom nav-color mb-14" data-margin="30" data-dots="false" data-nav="true"
+                 data-items-lg="3" data-items-md="2" data-items-xs="1">
+                <div class="swiper overflow-visible pb-2">
+                    <div class="swiper-wrapper">
+                        {% for blogs in all_blogs %}
+                        <div class="swiper-slide">
+                            <article>
+                                <div class="card shadow-lg">
+                                    <figure class="card-img-top overlay overlay-1">
+                                        <a href="{% url 'blogDetail' blogs.slug %}">
+                                            <img src="{{blogs.image.url}}" alt="{{blogs.title}}"/>
+                                        </a>
+                                        <figcaption>
+                                            <h5 class="from-top mb-0">Read More</h5>
+                                        </figcaption>
+                                    </figure>
+                                    <div class="card-body p-6">
+                                        <div class="post-header">
+                                            <h2 class="post-title h3 mt-1 mb-3">
+                                                <a class="link-dark" href="{% url 'blogDetail' blogs.slug %}">
+                                                    {{blogs.title|truncatechars:28}}
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div class="post-content">
+                                            <p>{{blogs.description|safe|truncatechars:290}}</p>
+                                        </div>
+                                        <div class="post-footer">
+                                            <ul class="post-meta d-flex mb-0">
+                                                <li class="post-date">
+                                                    <i class="uil uil-calendar-alt"></i>
+                                                    <span>{{blogs.submission_date|date:"d-M-Y"}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if all_home_adBlocks %}
+<section class="wrapper bg-light">
+    <div class="container py-10 pt-md-12">
+        <div class="row text-center">
+            <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                <h2 class="display-4 mb-3 px-xl-10 text-gradient gradient-7">Learning Resources</h2>
+                <h3 class="fs-15 mb-10">Access decades of wisdom and methods in Laughter Yoga at your fingertips</h3>
+            </div>
+        </div>
+        <div class="row gx-md-8 gx-xl-10">
+            {% for ads in all_home_adBlocks %}
+            <div class="col-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <figure class="rounded">
+                            <a href="{{ads.url}}" target="_blank">
+                                <img class="card-img-bottom" src="{{ads.image.url}}"
+                                     alt="{{ads.title}}" width="100%" height="100%"/>
+                            </a>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if all_journals %}
+<section class="wrapper bg-light wrapper-border">
+    <div class="container py-14 pt-md-10 pb-md-14">
+        <div class="row">
+            <div class="col-xl-7 col-xxl-6 mx-auto text-center">
+                <h2 class="display-5 text-center mt-2">Laughter Yoga</h2>
+                <p class="text-center mb-8">Featured over 2K+ journals across the globe</p>
+            </div>
+        </div>
+        <div class="swiper-container clients mb-0" data-margin="30" data-dots="false" data-loop="true"
+             data-autoplay="true" data-autoplaytime="1" data-drag="false" data-speed="5000" data-items-xxl="7"
+             data-items-xl="6" data-items-lg="5" data-items-md="4" data-items-xs="2">
+            <div class="swiper">
+                <div class="swiper-wrapper ticker">
+                    {% for journals in all_journals %}
+                    <div class="swiper-slide px-5">
+                        <img src="{{journals.image.url}}" alt="{{journals.title}}"/>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}
+{% block footerJS %}
+
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'back/base.html' %}
+{% load static %}
+{% block meta %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edit Services - {{webSettingsUniversal.title}}</title>
+    <meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+    <meta name="description" content="{{webSettingsUniversal.description}}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Edit Services - {{webSettingsUniversal.title}}">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+{% block content %}
+<div class="page-content">
+    <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18"></h4>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}" target="_parent">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'serviceList' %}" target="_parent">List Service</a></li>
+                            <li class="breadcrumb-item active">Edit Service</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Edit Service</h5>
+                        <p class="card-title-desc">You can use the below form to update your category.</p>
+                        {% include 'back/includes/messages.html' %}
+                        <form action="{% url 'serviceEdit' obj.id %}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        {{sform.category}}
+                                        <label>Category<span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        {{sform.title}}
+                                        <label>Title<span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        {{sform.description|safe}}
+                                        {{sform.media}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        {{sform.video_url}}
+                                        <label>Video URL</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        {{sform.status}}
+                                        <label>Status<span class="text-danger">*</span></label>
+                                        <small class="text-secondary">Draft: to hide your service.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-bottom my-3">
+                                <div class="col-md-12">
+                                    <h6 class="text-dark">Search Engine Optimisation</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        {{sform.meta_title}}
+                                        <label>Meta Title</label>
+                                        <small class="text-secondary">Title should be between 50-60 characters.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        {{sform.meta_description}}
+                                        <label>Meta Description</label>
+                                        <small class="text-secondary">Description should be between 150-160 characters.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        {{sform.meta_keywords}}
+                                        <label>Meta Keywords</label>
+                                        <small class="text-secondary">Minimum 3 Keywords required (separated by commas).</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary w-md">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extraFJS %}
+<script src="{% static 'back/assets/js/pages/form-validation.init.js' %}"></script>
+{% endblock %}

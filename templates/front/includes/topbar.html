@@ -1,0 +1,57 @@
+{% if webSettingsUniversal.topBar_status == 'Published' %}
+<div class="alert bg-primary text-white fade show rounded-0 mb-0 text-center" role="alert">
+    <div class="container">
+        <div class="alert-inner p-0">
+            <marquee>
+                {% if webSettingsUniversal.topBar_btnTxt %}
+                <span class="badge badge-lg bg-white text-primary text-uppercase rounded me-2">
+                    {{webSettingsUniversal.topBar_btnTxt}}
+                </span>
+                {% endif %}
+                {{webSettingsUniversal.topBar_text}}
+            </marquee>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div class="bg-primary text-white fw-bold fs-15 mb-2">
+    <div class="container py-2 d-md-flex flex-md-row">
+        <div class="d-flex flex-row align-items-center">
+            <div class="text-left social social-muted">
+                {% if webSettingsUniversal.fb_url %}
+                <a href="{{webSettingsUniversal.fb_url}}" target="_blank">
+                    <i class="uil uil-facebook-f"></i>
+                </a>
+                {% endif %}
+                {% if webSettingsUniversal.tw_url %}
+                <a href="{{webSettingsUniversal.tw_url}}" target="_blank">
+                    <i class="uil uil-twitter"></i>
+                </a>
+                {% endif %}
+                {% if webSettingsUniversal.ig_url %}
+                <a href="{{webSettingsUniversal.ig_url}}" target="_blank">
+                    <i class="uil uil-instagram"></i>
+                </a>
+                {% endif %}
+                {% if webSettingsUniversal.li_url %}
+                <a href="{{webSettingsUniversal.li_url}}" target="_blank">
+                    <i class="uil uil-linkedin"></i>
+                </a>
+                {% endif %}
+            </div>
+            <ul class="navbar-nav flex-row align-items-center ms-auto text-light">
+                <li class="nav-item d-lg-none text-white">
+                    <button class="hamburger offcanvas-nav-btn"><span></span></button>
+                </li>
+            </ul>
+        </div>
+        <div class="d-flex flex-row align-items-center me-6 ms-auto">
+            <div class="icon text-white fs-22 mt-1 me-2"><i class="uil uil-phone-volume"></i></div>
+            <p class="mb-0"><a href="tel:{{contactPageUniversalDetail.phone}}" target="_blank" class="link-white hover">{{contactPageUniversalDetail.phone}}</a></p>
+        </div>
+        <div class="d-flex flex-row align-items-center">
+            <div class="icon text-white fs-22 mt-1 me-2"><i class="uil uil-message"></i></div>
+            <p class="mb-0"><a href="mailto:{{contactPageUniversalDetail.email}}" target="_blank" class="link-white hover">{{contactPageUniversalDetail.email}}</a></p>
+        </div>
+    </div>
+</div>

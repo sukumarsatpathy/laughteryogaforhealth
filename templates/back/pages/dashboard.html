@@ -1,0 +1,432 @@
+{% extends 'back/base.html' %}
+{% load static %}
+{% block meta %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard - {{webSettingsUniversal.title}}</title>
+    <meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+    <meta name="description" content="{{webSettingsUniversal.description}}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Dashboard - {{webSettingsUniversal.title}}">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+{% block content %}
+<div class="page-content">
+    <div class="container-fluid">
+        {% include 'back/includes/messages.html' %}
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Dashboard</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card mini-stats-wid">
+                            <div class="card-body">
+                                <div class="d-flex flex-wrap">
+                                    <div class="me-3">
+                                        <p class="text-muted mb-2">Contact</p>
+                                        <h5 class="mb-0">{{contacts_count}}</h5>
+                                    </div>
+
+                                    <div class="avatar-sm ms-auto">
+                                        <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                            <i class="bx bxs-contact"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card blog-stats-wid">
+                            <div class="card-body">
+
+                                <div class="d-flex flex-wrap">
+                                    <div class="me-3">
+                                        <p class="text-muted mb-2">Invite</p>
+                                        <h5 class="mb-0">{{invite_count}}</h5>
+                                    </div>
+
+                                    <div class="avatar-sm ms-auto">
+                                        <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                            <i class="bx bxs-bulb"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card blog-stats-wid">
+                            <div class="card-body">
+                                <div class="d-flex flex-wrap">
+                                    <div class="me-3">
+                                        <p class="text-muted mb-2">Newsletter</p>
+                                        <h5 class="mb-0">{{newsletter_count}}</h5>
+                                    </div>
+                                    <div class="avatar-sm ms-auto">
+                                        <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                            <i class="bx bxs-message-square-dots"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card blog-stats-wid">
+                            <div class="card-body">
+                                <div class="d-flex flex-wrap">
+                                    <div class="me-3">
+                                        <p class="text-muted mb-2">Blogs</p>
+                                        <h5 class="mb-0">{{blog_count}}</h5>
+                                    </div>
+                                    <div class="avatar-sm ms-auto">
+                                        <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                            <i class="bx bxs-message-square-dots"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-4 col-lg-6">
+                <div class="card">
+                    <div class="card-header bg-transparent border-bottom">
+                        <div class="d-flex flex-wrap align-items-start">
+                            <div class="me-2">
+                                <h5 class="card-title mt-1 mb-0">Recent Blogs</h5>
+                            </div>
+                            <ul class="nav nav-tabs nav-tabs-custom card-header-tabs ms-auto" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#post-recent" role="tab">
+                                        Recent
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#post-popular" role="tab">
+                                        Popular
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div data-simplebar style="max-height: 295px;">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="post-recent" role="tabpanel">
+                                    {% if recent_blogs %}
+                                    <ul class="list-group list-group-flush">
+                                        {% for blog in recent_blogs %}
+                                        <li class="list-group-item py-3">
+                                            <div class="d-flex">
+                                                <div class="me-3">
+                                                    <img src="{{blog.image.url}}" alt=""
+                                                         class="avatar-md h-auto d-block rounded">
+                                                </div>
+                                                <div class="align-self-center overflow-hidden me-auto">
+                                                    <div>
+                                                        <h5 class="font-size-14 text-truncate">
+                                                            <a href="javascript: void(0);" class="text-dark">{{blog.title}}</a>
+                                                        </h5>
+                                                        <p class="text-muted mb-0">{{blog.submission_date}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% else %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        No Recent Blogs Found!
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="tab-pane" id="post-popular" role="tabpanel">
+                                    {% if popular_blogs %}
+                                    <ul class="list-group list-group-flush">
+                                        {% for blog in popular_blogs %}
+                                        <li class="list-group-item py-3">
+                                            <div class="d-flex">
+                                                <div class="me-3">
+                                                    <img src="{{blog.image.url}}" alt=""
+                                                         class="avatar-md h-auto d-block rounded">
+                                                </div>
+                                                <div class="align-self-center overflow-hidden me-auto">
+                                                    <div>
+                                                        <h5 class="font-size-14 text-truncate">
+                                                            <a href="javascript: void(0);" class="text-dark">{{blog.title}}</a>
+                                                        </h5>
+                                                        <p class="text-muted mb-0">{{blog.submission_date}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% else %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        No Popular Blogs Found!
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap align-items-start">
+                            <div class="me-2">
+                                <h5 class="card-title mb-3">What People Say</h5>
+                            </div>
+                        </div>
+
+                        <div data-simplebar style="max-height: 310px;">
+                            {% if latest_testimonials %}
+                            <ul class="list-group list-group-flush">
+                                {% for testimonials in latest_testimonials%}
+                                <li class="list-group-item py-3">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-xs">
+                                                <div class="avatar-title rounded-circle bg-light text-primary">
+                                                    <img src="{{testimonials.image.url}}" class="avatar-sm" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <small class="text-muted float-end">
+                                                {{testimonials.submission_date|timesince}} ago
+                                            </small>
+                                            <span class="font-size-14 mb-1">{{testimonials.fullName|truncatechars:15}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                No Testimonials Found!
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+
+            <div class="col-xl-4">
+                <div class="card">
+                    {% if latest_ads %}
+                    <div class="card-body">
+                        <div class="d-flex align-items-start">
+                            <div class="me-2">
+                                <h5 class="card-title mb-4">Ads Published</h5>
+                            </div>
+                        </div>
+                        {% for ad in latest_ads %}
+                        <img src="{{ad.image.url}}" alt="{{ad.title}}" class="img-fluid avatar-md mb-2">
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="card-body">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            No Ads Found!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="card">
+                    {% if latest_journals %}
+                    <div class="card-body">
+                        <div class="d-flex align-items-start">
+                            <div class="me-2">
+                                <h5 class="card-title mb-4">Journals Published</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% for journals in latest_journals %}
+                            <div class="col-4">
+                                <img src="{{journals.image.url}}" alt="{{journals.title}}" class="mb-2" width="80px" height="auto" />
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="card-body">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            No Journals Found!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Contact Form -->
+            <div class="col-xl-4">
+                <div class="card">
+                    {% if latest_contacts %}
+                    <div class="card-body">
+                        <div class="d-flex align-items-start">
+                            <div class="me-2">
+                                <h5 class="card-title mb-4">Latest Contacts</h5>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap mb-0">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                                <tbody>
+                                {% for con in latest_contacts %}
+                                <tr>
+                                    <td style="width: 50px;">{{forloop.counter}}</td>
+                                    <td>{{con.fullName}}</td>
+                                    <td>{{con.email}}</td>
+                                    <td>{{con.submitted_date}}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="card-body">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            No Contacts Found!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <!-- Invite Form -->
+            <div class="col-xl-4">
+                <div class="card">
+                    {% if latest_invites %}
+                    <div class="card-body">
+                        <div class="d-flex align-items-start">
+                            <div class="me-2">
+                                <h5 class="card-title mb-4">Latest Invites</h5>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap mb-0">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Contact</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                                <tbody>
+                                {% for con in latest_invites %}
+                                <tr>
+                                    <td style="width: 50px;">{{forloop.counter}}</td>
+                                    <td>{{con.fullName}}</td>
+                                    <td>{{con.email}}</td>
+                                    <td>{{con.contact}}</td>
+                                    <td>{{con.country}}</td>
+                                    <td>{{con.submitted_date}}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="card-body">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            No Invites Found!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Newsletter Form -->
+            <div class="col-xl-4">
+                <div class="card">
+                    {% if latest_subscribers %}
+                    <div class="card-body">
+                        <div class="d-flex align-items-start">
+                            <div class="me-2">
+                                <h5 class="card-title mb-4">Latest Subscribers</h5>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap mb-0">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                                <tbody>
+                                {% for con in latest_subscribers %}
+                                <tr>
+                                    <td style="width: 50px;">{{forloop.counter}}</td>
+                                    <td>{{con.email}}</td>
+                                    <td>{{con.submitted_date}}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="card-body">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            No Subscribers Found!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extraFJS %}
+<!-- dashboard init -->
+<script src="{% static 'back/assets/js/pages/dashboard.init.js' %}"></script>
+{% endblock %}

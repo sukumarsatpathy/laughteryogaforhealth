@@ -1,0 +1,175 @@
+{% extends 'front/base.html' %}
+{% load static %}
+{% block meta %}
+<title>About Trainer - {{webSettingsUniversal.title}}</title>
+<meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+<meta name="description" content="{{webSettingsUniversal.description}}">
+<meta name="author" content="Er. Sukumar Satapathy">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="About Trainer - {{webSettingsUniversal.title}}">
+<meta property="og:url" content="{{request.scheme}}://{{request.get_host}}{{request.get_full_path}}">
+<meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+{% block extraJS %}
+<!-- Google Recaptcha -->
+<script defer src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock %}
+{% block content %}
+<section class="wrapper bg-soft-primary">
+    <div class="container pt-10 pb-20 pt-md-14 pb-md-17 text-center">
+        <div class="row">
+            <div class="col-xl-5 mx-auto mb-10">
+                <h1 class="display-1 mb-3">Ashwin and Deepika</h1>
+                <p class="lead mb-0">Certified Laughter Yoga Teachers</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="wrapper bg-light">
+    <div class="container pb-14 pb-md-16">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="blog single mt-n17">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <p>{% include 'front/includes/messages.html' %}</p>
+                            <div class="row">
+                                <div class="col-md-7 col-lg-7">
+                                    <p class="h1 mb-5 text-gradient gradient-7">About Ashwin and Deepika</p>
+                                    <p><img src="{% static 'img/pic/ashwin-deepika.jpg' %}"
+                                            style="width:200px; border-radius:10px; float:left; box-shadow:3px 3px 5px #ccc; margin:3px 20px 0px 0px;"/>
+                                        In 2002, my wife and I were at a social gathering in Alhambra, CA. All of a
+                                        sudden we heard HO HO HO HA HA HA and loud laughter. We went closer to see what
+                                        was happening and with great surprise we saw my Dad leading Laughter Yoga! He
+                                        was visiting from India. It was really shocking and seemed crazy at first, since
+                                        we had no clue what was happening. After the party, while going home we talked
+                                        to my Dad, and he explained what Laughter Yoga is, how it has so many health
+                                        benefits because of deep belly laughter and yogik breathing. It was interesting
+                                        at the moment, however we continued on with our lives without being pulled in to
+                                        know more at the time.</p>
+                                    <p>Then, in 2012, our daughter who lived in New York City called us and shared that
+                                        she registered for Laughter Yoga Leader training. Because of her remembering her
+                                        grandfather doing it, she would keep us in the loop as she did Laughter Yoga
+                                        sessions at universities and for staff wellness events. Due to her experiences
+                                        and sharing along the way, my wife and I became more intrigued by Laughter Yoga
+                                        as a practice. We started to appreciate the practice along with its
+                                        benefits.</p>
+                                    <p>In 2022, our daughter forwarded an e-mail about a Laughter Yoga Teacher
+                                        certification in India led by Dr. Madan Kataria himself in India. We happened to
+                                        be going to India during that time frame and were able to connect with Dr.
+                                        Kataria. We were able to quickly coordinate the prerequisite of completing an
+                                        online 5 day leader training before the in-person teacher training at the
+                                        Laughter Yoga headquarters in Nashik, India, which was in January 2023. We had
+                                        such an amazing experience, learned about so many benefits and were surprised to
+                                        learn that more than 100 countries have laughter clubs set up on a regular basis
+                                        and are reaping the benefits of laughter.</p>
+                                    <p>Laughter Yoga has certainly changed our life as we realize with playfulness and
+                                        not taking life too seriously, we can become healthier and more joyful. Why not
+                                        pass this accessible practice to as many people as we can? We have felt a great
+                                        sense of satisfaction to be able to immediately start leading sessions and
+                                        sharing the practice of laughter with others. We see the immediate benefits of
+                                        social connections, the positive effects it brings to a group dynamic, and know
+                                        all the health benefits that come along with increased endorphins.</p>
+                                    <p>It has been such a joy to be able to have this tool to use and give back to the
+                                        larger community for a more positive impact on the world.</p>
+                                </div>
+                                <div class="col-md-5 col-lg-5">
+                                    <p class="h1 mb-5 text-gradient gradient-7">Invite Ashwin and Deepika as Speaker</p>
+                                    <form action="{% url 'aboutTrainer' %}" method="POST"
+                                          class="text-start mb-3 needs-validation" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row gx-4">
+                                            <div class="col-md-12">
+                                                <div class="form-floating mb-4">
+                                                    <input id="form_name" type="text" name="fullName"
+                                                           class="form-control" placeholder="Full Name" required>
+                                                    <label for="form_name">Full Name *</label>
+                                                    <div class="valid-feedback"> Looks good!</div>
+                                                    <div class="invalid-feedback"> Please enter your first name.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row gx-4">
+                                            <div class="col-md-12">
+                                                <div class="form-floating mb-4">
+                                                    <input id="form_email" type="email" name="email"
+                                                           class="form-control" placeholder="jane.doe@example.com"
+                                                           required>
+                                                    <label for="form_email">Email *</label>
+                                                    <div class="valid-feedback"> Looks good!</div>
+                                                    <div class="invalid-feedback"> Please provide a valid email
+                                                        address.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row gx-4">
+                                            <div class="col-md-12">
+                                                <div class="form-floating mb-4">
+                                                    <input id="form_contact" type="text" name="contact"
+                                                           class="form-control" placeholder="Number with Country Code"
+                                                           required>
+                                                    <label for="form_contact">Contact *</label>
+                                                    <div class="valid-feedback"> Looks good!</div>
+                                                    <div class="invalid-feedback"> Please provide a valid email
+                                                        address.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row gx-4">
+                                            <div class="col-md-12">
+                                                <div class="form-floating mb-4">
+                                                    <input id="form_country" type="text" name="country"
+                                                           class="form-control" placeholder="Country Name" required>
+                                                    <label for="form_country">Country *</label>
+                                                    <div class="valid-feedback"> Looks good!</div>
+                                                    <div class="invalid-feedback"> Please provide a valid email
+                                                        address.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row gx-4">
+                                            <div class="col-12 text-center">
+                                                <div class="form-floating mb-4">
+                                                <textarea id="form_message" name="message" class="form-control"
+                                                          placeholder="Your message" style="height: 100px"
+                                                          required></textarea>
+                                                    <label for="form_message">Message *</label>
+                                                    <div class="valid-feedback"> Looks good!</div>
+                                                    <div class="invalid-feedback"> Please enter your messsage.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row gx-4 pb-4 justify-content-center">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="g-recaptcha" data-sitekey="{{site_key}}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row gx-4">
+                                            <div class="col-12 text-center">
+                                                <button type="submit" class="btn btn-primary
+                                                rounded-pill btn-send mb-3">Send Message
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="row gx-4">
+                                            <div class="col-12 text-center">
+                                                {{form.non_field_errors}}
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

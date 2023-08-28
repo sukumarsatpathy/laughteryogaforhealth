@@ -1,0 +1,75 @@
+{% extends 'back/base.html' %}
+{% load static %}
+{% load blogURL %}
+{% block meta %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>List Term Pages - {{webSettingsUniversal.title}}</title>
+    <meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+    <meta name="description" content="{{webSettingsUniversal.description}}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="List Pages - {{webSettingsUniversal.title}}">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+{% block content %}
+<div class="page-content">
+    <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0 font-size-18">List Term Pages</h4>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}" target="_parent">Dashboard</a></li>
+                            <li class="breadcrumb-item active">List Term Pages</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        {% include 'back/includes/messages.html' %}
+        <div class="row">
+            <div class="col-lg-12">
+                {% if all_termPages %}
+                <div class="table-responsive">
+                    <table class="table project-list-table table-nowrap align-middle table-borderless">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width: 100px">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col" style="width: 200px" >Status</th>
+                            <th scope="col" style="width: 200px">Updated On</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for termPage in all_termPages %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{termPage.title}}</td>
+                            <td>
+                                <span class="badge bg-{% if termPage.status == 'Published' %}success{% else %}warning{% endif %}">{{termPage.status}}</span>
+                            </td>
+                            <td>{{termPage.updated_on}}</td>
+                            <td><a href="{% url 'editTermPage' termPage.slug %}" target="_parent">Edit</a></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Oops!!! No Term Pages Found. Please publish a new term page.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

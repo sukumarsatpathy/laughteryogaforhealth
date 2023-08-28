@@ -1,0 +1,99 @@
+{% extends 'front/base.html' %}
+{% load static %}
+{% load blogURL %}
+{% load embed_video_tags %}
+{% block meta %}
+    <title>Blogs - {{webSettingsUniversal.title}}</title>
+    <meta name="keywords" content="{% if single_blog.meta_keywords %}{{single_blog.meta_keywords}}{% else %}{{webSettingsUniversal.keywords}}{% endif %}"/>
+    <meta name="description" content="{% if single_blog.meta_description %}{{single_blog.meta_description}}{% else %}{{webSettingsUniversal.description}}{% endif %}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Blogs - {{webSettingsUniversal.title}}">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+{% block content %}
+<section class="wrapper bg-light">
+    <div class="container py-14 py-md-12">
+        <div class="row gx-lg-8 gx-xl-12">
+            <div class="col-lg-8">
+                <div class="blog single">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="classic-view">
+                                <article class="post">
+                                    <div class="post-content mb-5">
+                                        <h2 class="h1 mb-4">{{single_blog.title}}</h2>
+                                        <p><img src="{{single_blog.image.url}}" class="img-fluid" /> </p>
+                                        <p>{{single_blog.description|safe}}</p>
+                                    </div>
+                                    <!-- /.post-content -->
+                                    {% if single_blog.meta_keywords %}
+                                    <div class="post-footer d-md-flex flex-md-row justify-content-md-between align-items-center mt-8">
+                                        <div>
+                                            <ul class="list-unstyled tag-list mb-0">
+                                                <li><a href="#" class="btn btn-soft-ash btn-sm rounded-pill mb-0">Keywords:
+                                                    {{single_blog.meta_keywords}}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </article>
+                            </div>
+                            <hr/>
+                            <h3 class="mb-6">You Might Also Like</h3>
+                            <div class="swiper-container blog grid-view mb-16" data-margin="30" data-dots="true"
+                                 data-items-md="2" data-items-xs="1">
+                                <div class="swiper">
+                                    <div class="swiper-wrapper">
+                                        {% for rb in related_blogs %}
+                                        <div class="swiper-slide">
+                                            <article>
+                                                <figure class="overlay overlay-1 hover-scale rounded mb-5">
+                                                    <a href="{% url 'blogDetail' rb.slug %}" target="_parent">
+                                                        <img src="{{rb.image.url}}" alt="{{rb.title}}"/>
+                                                    </a>
+                                                    <figcaption>
+                                                        <h5 class="from-top mb-0">Read More</h5>
+                                                    </figcaption>
+                                                </figure>
+                                                <div class="post-header">
+                                                    <h2 class="post-title h3 mt-1 mb-3">
+                                                        <a class="link-dark" href="{% url 'blogDetail' rb.slug %}"
+                                                           target="_parent">
+                                                            {{rb.title}}
+                                                        </a>
+                                                    </h2>
+                                                </div>
+                                                <div class="post-footer">
+                                                    <ul class="post-meta mb-0">
+                                                        <li class="post-date">
+                                                            <i class="uil uil-calendar-alt"></i>
+                                                            <span>{{rb.submission_date}}</span>
+                                                        </li>
+                                                        <li class="post-comments">
+                                                            <a href="#">
+                                                                <i class="uil uil-eye"></i>{{rb.views}}
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% include 'front/includes/sidebar.html' %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block footerJS %}
+<script src="{% static '/js/plugins.js' %}"></script>
+{% endblock %}

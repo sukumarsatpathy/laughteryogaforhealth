@@ -1,0 +1,121 @@
+{% extends 'front/base.html' %}
+{% load static %}
+{% load blogURL %}
+{% block meta %}
+    <title>Blogs - {{webSettingsUniversal.title}}</title>
+    <meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+    <meta name="description" content="{{webSettingsUniversal.description}}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Blogs - {{webSettingsUniversal.title}}">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+{% block content %}
+<section class="wrapper bg-soft-primary">
+    <div class="container pt-10 pb-19 pt-md-14 pb-md-20 text-center">
+        <div class="row">
+            <div class="col-md-7 col-lg-6 col-xl-5 mx-auto">
+                <h1 class="display-1 mb-3">Blogs</h1>
+                <p class="lead px-lg-5 px-xxl-8">Welcome to our blogs. Here you can find our latest laughter yoga activities.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="wrapper bg-light">
+    <div class="container pb-14 pb-md-16">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="blog classic-view mt-n17">
+                    <div class="blog grid grid-view">
+                        <div class="row isotope gx-md-8 gy-8 mb-8">
+                            {% for blog in all_blogs %}
+                            <article class="item post col-md-6">
+                                <div class="card">
+                                    <figure class="card-img-top overlay overlay-1 hover-scale">
+                                        <a href="{% url 'blogDetail' blog.slug %}" target="_parent">
+                                            <img src="{{blog.image.url}}" alt="{{blog.title}}"/>
+                                        </a>
+                                        <figcaption>
+                                            <h5 class="from-top mb-0">Read More</h5>
+                                        </figcaption>
+                                    </figure>
+                                    <div class="card-body">
+                                        <div class="post-header">
+                                            <h2 class="post-title h3 mt-1 mb-3">
+                                                <a class="link-dark" href="{% url 'blogDetail' blog.slug %}" target="_parent">
+                                                    {{blog.title|truncatechars:38}}
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div class="post-content">
+                                            <p>{{blog.description|safe|truncatechars:300}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <ul class="post-meta d-flex mb-0">
+                                            <li class="post-date">
+                                                <i class="uil uil-calendar-alt"></i>
+                                                <span>{{blog.submission_date|date:"d-M-Y"}}</span>
+                                            </li>
+                                            <li class="post-likes ms-auto">
+                                                <a href="#">
+                                                    <i class="uil uil-eye"></i>{{blog.views}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </article>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <nav class="d-flex" aria-label="pagination">
+                    {% if all_blogs.has_other_pages %}
+                    <ul class="pagination">
+                        {% if all_blogs.has_previous %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true"><i class="uil uil-arrow-left"></i></span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true"><i class="uil uil-arrow-left"></i></span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% for i in all_blogs.paginator.page_range %}
+                        {% if all_blogs.number == i %}
+                        <li class="page-item active"><a class="page-link" href="{% blogURL i 'page' request.GET.urlencode %}">{{i}}</a></li>
+                        {% elif i > all_blogs.number|add:'-7' and i < all_blogs.number|add:'7' %}
+                        <li class="page-item"><a class="page-link" href="{% blogURL i 'page' request.GET.urlencode %}">{{i}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if all_blogs.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true"><i class="uil uil-arrow-right"></i></span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true"><i class="uil uil-arrow-right"></i></span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

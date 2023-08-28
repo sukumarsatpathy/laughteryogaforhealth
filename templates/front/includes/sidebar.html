@@ -1,0 +1,32 @@
+<aside class="col-lg-4 sidebar mt-11 mt-lg-6">
+    <div class="widget">
+        <h4 class="widget-title mb-3">Latest Blogs</h4>
+        <ul class="image-list">
+            {% for blogs in all_blogs %}
+            <li>
+                <figure class="rounded">
+                    <a href="{% url 'blogDetail' blogs.slug %}">
+                        <img src="{{blogs.image.url}}" alt="{{blogs.title}}" height="200px;"/>
+                    </a>
+                </figure>
+                <div class="post-content">
+                    <h6 class="mb-2">
+                        <a class="link-dark" href="{% url 'blogDetail' blogs.slug %}">{{blogs.title}}</a>
+                    </h6>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% for ads in all_adBlocks %}
+    <div class="widget">
+        <a href="{{ads.url}}" target="_blank">
+            <figure class="rounded mb-2">
+                <img src="{{ads.image.url}}" srcset="{{ads.image.url}}" alt="{{ads.title}}">
+            </figure>
+        </a>
+    </div>
+    {% endfor %}
+
+</aside>

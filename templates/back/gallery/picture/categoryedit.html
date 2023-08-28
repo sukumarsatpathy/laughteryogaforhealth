@@ -1,0 +1,82 @@
+{% extends 'back/base.html' %}
+{% load static %}
+{% block meta %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edit Photo Categories - {{webSettingsUniversal.title}}</title>
+    <meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+    <meta name="description" content="{{webSettingsUniversal.description}}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Edit Photo Categories - {{webSettingsUniversal.title}}">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+{% block content %}
+<div class="page-content">
+    <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18"></h4>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}" target="_parent">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'pcatList' %}" target="_parent">List Category</a></li>
+                            <li class="breadcrumb-item active">Edit Categories</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Edit Category</h5>
+                        <p class="card-title-desc">You can use the below form to update your blog.</p>
+                        {% include 'back/includes/messages.html' %}
+                        <form action="{% url 'pcatEdit' obj.slug %}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        {{pCatForm.title}}
+                                        <label>Title<span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="mt-2 mb-4">
+                                        <label for="formFile" class="form-label">Image<span class="text-danger">*</span></label>
+                                        {{pCatForm.image}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3">
+                                        {{pCatForm.status}}
+                                        <label>Status</label>
+                                        <small class="text-secondary">Draft: to hide your Category.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary w-md">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extraFJS %}
+<script src="{% static 'back/assets/js/pages/form-validation.init.js' %}"></script>
+{% endblock %}

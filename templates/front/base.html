@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta Block Starts Here -->
+    {% block meta %}
+
+    {% endblock %}
+    <!-- Meta Block Ends Here -->
+    <link rel="shortcut icon" href="{% static '/img/favicon.png' %}">
+    <link rel="stylesheet" href="{% static '/css/plugins.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/colors/blue.css' %}">
+    <link rel="preload" href="{% static '/css/fonts/thicccboi.css' %}" as="style" onload="this.rel='stylesheet'">
+
+    {% block extraJS %}
+
+    {% endblock %}
+
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <!-- Header Starts Here -->
+        <header class="wrapper bg-soft-primary">
+            <!--{% include 'front/includes/topbar.html' %}-->
+            <nav class="navbar navbar-expand-lg center-nav transparent navbar-light">
+            {% include 'front/includes/navbar.html' %}
+            </nav>
+        </header>
+        <!-- Header Ends Here -->
+
+        <!-- Content Section Starts Here -->
+        {% block content %}
+
+        {% endblock %}
+        <!-- Content Section Ends Here -->
+
+    </div>
+
+    <!-- Footer Starts Here -->
+    <footer class="bg-dark text-inverse">
+        {% include 'front/includes/footer.html' %}
+    </footer>
+    <!-- Footer Ends Here -->
+
+    <div class="progress-wrap">
+      <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+          <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+      </svg>
+    </div>
+    {% block footerJS %}
+
+    {% endblock %}
+    <script src="{% static '/js/plugins.js' %}"></script>
+    <script src="{% static '/js/theme.js' %}"></script>
+    <script src="{% static '/js/custom.js' %}"></script>
+    <script>
+        var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?56551';
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = url;
+        var options = {
+        "enabled":true,
+        "chatButtonSetting":{
+          "backgroundColor":"#4dc247",
+          "ctaText":"",
+          "borderRadius":"25",
+          "marginLeft":"0",
+          "marginBottom":"85",
+          "marginRight":"30",
+          "position":"right"
+        },
+        "brandSetting":{
+          "brandName":"Laughter Yoga For Health",
+          "brandSubTitle":"Typically replies within a day",
+          "brandImg":"https://cdn.clare.ai/wati/images/WATI_logo_square_2.png",
+          "welcomeText":"Hi there!\nHow can I help you?",
+          "messageText":"Hello, I have a question about {{page_link}}",
+          "backgroundColor":"#0a5f54",
+          "ctaText":"Start Chat",
+          "borderRadius":"25",
+          "autoShow":false,
+          "phoneNumber":"16263833522"
+        }
+        };
+        s.onload = function() {
+            CreateWhatsappChatWidget(options);
+        };
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    </script>
+</body>
+
+</html>

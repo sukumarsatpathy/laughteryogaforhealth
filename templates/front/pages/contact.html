@@ -1,0 +1,152 @@
+{% extends 'front/base.html' %}
+{% load static %}
+{% block meta %}
+    <title>Contact Us - {{webSettingsUniversal.title}}</title>
+    <meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+    <meta name="description" content="{{webSettingsUniversal.description}}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Contact Us - {{webSettingsUniversal.title}}">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+
+{% block extraJS %}
+<!-- Google Recaptcha -->
+<script defer src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock %}
+
+{% block content %}
+<section class="wrapper bg-soft-primary">
+    <div class="container pt-17 pb-20 pt-md-14 pb-md-21 text-center">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="display-1 mb-3">Get in Touch</h1>
+                <nav class="d-inline-block" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" target="_parent">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="wrapper bg-light angled upper-end">
+    <div class="container pb-11">
+        <div class="row mb-14 mb-md-16">
+            <div class="col-xl-10 mx-auto mt-n19">
+                <div class="card">
+                    <div class="row gx-0">
+                        <div class="col-lg-6 align-self-stretch">
+                            <div class="map map-full rounded-top rounded-lg-start">
+                                {{contactPageDetail.map_url|safe}}
+                            </div>
+                            <!-- /.map -->
+                        </div>
+                        <!--/column -->
+                        <div class="col-lg-6">
+                            <div class="p-10 p-md-11 p-lg-14">
+                                <div class="d-flex flex-row">
+                                    <div>
+                                        <div class="icon text-primary fs-28 me-4 mt-n1"><i
+                                                class="uil uil-location-pin-alt"></i></div>
+                                    </div>
+                                    <div class="align-self-start justify-content-start">
+                                        <h5 class="mb-1">Address</h5>
+                                        <address>
+                                            {{contactPageDetail.address}}
+                                        </address>
+                                    </div>
+                                </div>
+                                <!--/div -->
+                                <div class="d-flex flex-row">
+                                    <div>
+                                        <div class="icon text-primary fs-28 me-4 mt-n1"><i
+                                                class="uil uil-phone-volume"></i></div>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Phone</h5>
+                                        <p><a href="tel:{{contactPageDetail.phone}}">{{contactPageDetail.phone}}</a></p>
+                                    </div>
+                                </div>
+                                <!--/div -->
+                                <div class="d-flex flex-row">
+                                    <div>
+                                        <div class="icon text-primary fs-28 me-4 mt-n1"><i class="uil uil-envelope"></i></div>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">E-mail</h5>
+                                        <p class="mb-0"><a href="mailto:{{contactPageDetail.email}}" class="link-body">{{contactPageDetail.email}}</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+                <h2 class="display-4 mb-3 text-center">Drop Us a Line</h2>
+                <p class="lead text-center mb-10">Reach out to us from our contact form and we will get back to you
+                    shortly.</p>
+                {% include 'front/includes/messages.html' %}
+                <form action="{% url 'contact' %}" method="POST" class="needs-validation" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row gx-4">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-4">
+                                <input id="form_name" type="text" name="fullName"
+                                       class="form-control" placeholder="Full Name" required>
+                                <label for="form_name">Full Name *</label>
+                                <div class="valid-feedback"> Looks good!</div>
+                                <div class="invalid-feedback"> Please enter your first name.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-4">
+                                <input id="form_email" type="email" name="email"
+                                       class="form-control" placeholder="jane.doe@example.com" required>
+                                <label for="form_email">Email *</label>
+                                <div class="valid-feedback"> Looks good!</div>
+                                <div class="invalid-feedback"> Please provide a valid email address.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gx-4">
+                        <div class="col-12 text-center">
+                            <div class="form-floating mb-4">
+                                <textarea id="form_message" name="message" class="form-control"
+                                          placeholder="Your message" style="height: 150px" required></textarea>
+                                <label for="form_message">Message *</label>
+                                <div class="valid-feedback"> Looks good!</div>
+                                <div class="invalid-feedback"> Please enter your messsage.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gx-4 pb-4 justify-content-center">
+                        <div class="col-12 text-center">
+                            <div class="form-group">
+                                <div class="g-recaptcha" data-sitekey="{{site_key}}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gx-4">
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-primary rounded-pill btn-send mb-3">Send Message</button>
+                            <p class="text-muted"><strong>*</strong> These fields are required.</p>
+                        </div>
+                    </div>
+                    <div class="row gx-4">
+                        <div class="col-12 text-center">
+                            {{form.non_field_errors}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

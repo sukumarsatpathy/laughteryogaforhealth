@@ -1,0 +1,133 @@
+<div data-simplebar class="h-100">
+    <div id="sidebar-menu">
+        <ul class="metismenu list-unstyled" id="side-menu">
+            <li class="menu-title" key="t-menu">Important</li>
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    <i class="bx bx-home-circle"></i>
+                    <span key="t-dashboards">Dashboards</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-user"></i>
+                    <span key="t-layouts">Profile</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                    <li><a href="{% url 'editProfile' %}" key="t-tui-calendar">Edit Profile</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="{% url 'listBlogs' %}">
+                    <i class="bx bx-book-content"></i>
+                    <span key="t-blogs">Blogs</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'listEvents' %}">
+                    <i class="bx bx-calendar"></i>
+                    <span key="t-event">Events</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'listTestimonials' %}">
+                    <i class="bx bx-happy"></i>
+                    <span key="t-testimonials">Testimonials</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-station"></i>
+                    <span key="t-gallery">Service</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                    <li><a href="{% url 'serviceCategoryList' %}" key="t-tui-category">List Category</a></li>
+                    <li><a href="{% url 'serviceList' %}" key="t-tui-category">List Services</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-image"></i>
+                    <span key="t-gallery">Photo Gallery</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                    <li><a href="{% url 'pcatList' %}" key="t-tui-category">List Category</a></li>
+                    <li><a href="{% url 'photoList' %}" key="t-tui-photos">List Photos</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-video"></i>
+                    <span key="t-gallery">Video Gallery</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                    <li><a href="{% url 'vcatList' %}" key="t-tui-category">List Category</a></li>
+                    <li><a href="{% url 'videoList' %}" key="t-tui-photos">List Videos</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="{% url 'adblockList' %}">
+                    <i class="bx bx-mouse"></i>
+                    <span key="t-testimonials">Ad Block</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'journalList' %}">
+                    <i class="bx bx-user-voice"></i>
+                    <span key="t-testimonials">Journals</span>
+                </a>
+            </li>
+            <li>
+                <li class="menu-title" key="t-settings">Settings</li>
+                <li>
+                    <a href="{% url 'ListTermPage' %}">
+                        <i class="bx bx-detail"></i>
+                        <span key="t-contactPage">Term Pages</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-images"></i>
+                        <span key="t-settings">Banner</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{% url 'bannerList' %}" key="t-tui-bannerText">Text</a></li>
+                        <li><a href="{% url 'bannerImageList' %}" key="t-tui-bannerImage">Images</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'contactPageEdit' %}">
+                        <i class="bx bx-map"></i>
+                        <span key="t-contactPage">Contact Page</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'copyrightPageEdit' %}">
+                        <i class="bx bx-copyright"></i>
+                        <span key="t-copyrightPage">Copyright</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'webSettingsEdit' %}">
+                        <i class="bx bx-first-page"></i>
+                        <span key="t-webSettings">Web Settings</span>
+                    </a>
+                </li>
+            </li>
+            <li>
+                <li class="menu-title" key="t-components">Report</li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bxs-data"></i>
+                        <span key="t-blogs">Form Data</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{% url 'cfd' %}" key="t-tui-blogs">Contact Form</a></li>
+                        <li><a href="{% url 'invtd' %}" key="t-tui-blogs">Invite Form</a></li>
+                        <li><a href="{% url 'nwsld' %}" key="t-tui-blogs">Newsletter Form</a></li>
+                    </ul>
+                </li>
+            </li>
+        </ul>
+    </div>
+</div>

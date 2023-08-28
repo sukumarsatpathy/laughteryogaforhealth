@@ -1,0 +1,58 @@
+{% extends 'front/base.html' %}
+{% load static %}
+{% block meta %}
+    <title>Events - {{webSettingsUniversal.title}}</title>
+    <meta name="keywords" content="{{webSettingsUniversal.keywords}}"/>
+    <meta name="description" content="{{webSettingsUniversal.description}}">
+    <meta name="author" content="Er. Sukumar Satapathy">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Events - {{webSettingsUniversal.title}}">
+    <meta property="og:url" content="{{request.scheme}}://{{ request.get_host }}{{request.get_full_path}}">
+    <meta property="og:site_name" content="{{webSettingsUniversal.title}}">
+{% endblock %}
+{% block content %}
+<section class="wrapper bg-soft-primary">
+    <div class="container pt-10 pt-md-14 pb-md-13 text-center">
+        <div class="row">
+            <div class="col-xl-5 mx-auto">
+                <h1 class="display-1 mb-3">Upcoming Events</h1>
+                <p class="lead mb-0">Free Public Seminars, Basic Learning Course, Certified Leader Training</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="wrapper bg-light">
+    <div class="container py-10 py-md-16">
+        <div class="row">
+            <div class="col-xl-10 mx-auto">
+                <div class="job-list mb-10">
+					{% for event in all_events %}
+                    <a href="{% url 'eventDetail' event.slug %}" class="card mb-4 lift">
+                        <div class="card-body p-5">
+							<span class="row justify-content-between align-items-center">
+								<span class="col-md-5 mb-2 mb-md-0 d-flex align-items-center text-body">
+									<img src="{{event.image.url}}" class="rounded-circle w-12 h-12"/>  &nbsp; {{event.title}}
+								</span>
+								<span class="col-5 col-md-3 text-body d-flex align-items-center">
+									<i class="uil uil-clock me-1"></i> {{event.start_date|date:'M d, Y - g:i A'}} </span>
+								<span class="col-7 col-md-4 col-lg-3 text-body d-flex align-items-center">
+									<i class="uil uil-location-arrow me-1"></i> {{event.location}} </span>
+                                <span class="d-none d-lg-block col-1 text-center text-body">
+                                    <i class="uil uil-angle-right-b"></i>
+                                </span>
+							</span>
+                        </div>
+                        <!-- /.card-body -->
+                    </a>
+					{% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
