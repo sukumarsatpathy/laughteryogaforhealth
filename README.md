@@ -56,9 +56,6 @@ Welcome to Laughter Yoga for Health project by Laughter CMS, a comprehensive pla
 - Secure authentication system.
 - Password recovery functionality for added user convenience.
 
-## License
-This project is licensed under the MIT License.
-
 ## Acknowledgements
 1. Bootstrap5 Documentation 
 2. Django Documentation
