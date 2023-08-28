@@ -5,7 +5,7 @@ Welcome to Laughter Yoga for Health project by Laughter CMS, a comprehensive pla
 ## Technologies Used
 - **Backend**: Django
 - **Frontend**: Bootstrap5 (HTML, CSS, JS)
-  - **Database**: PostgreSQL
+- **Database**: PostgreSQL
 
 ## Features
 
